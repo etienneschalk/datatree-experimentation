@@ -1,0 +1,21 @@
+[tool.poetry]
+authors = ["eschalk <etienne.schalk@gmail.com>"]
+description = ""
+name = "datatree-experimentation"
+packages = [{include = "datatree_experimentation"}]
+readme = "README.md"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+xarray-datatree = "^0.0.13"
+zarr = "^2.16.1"
+dask = "^2023.11.0"
+jinja2 = "^3.1.2"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.26.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
