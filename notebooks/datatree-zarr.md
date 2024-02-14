@@ -1,4 +1,10 @@
-# Lack of resilience towards missing `_ARRAY_DIMENSIONS` xarray's special Zarr attribute 
+_Original issue: https://github.com/xarray-contrib/datatree/issues/280_
+
+_Note: this issue description was generated from a [notebook](https://github.com/etienneschalk/datatree-experimentation/blob/main/notebooks/datatree-zarr.ipynb). You can use it to reproduce locally the bug._
+
+
+# Lack of resilience towards missing `_ARRAY_DIMENSIONS` xarray's special Zarr attribute
+
 
 
 ```python
@@ -149,13 +155,14 @@ show(xr.open_zarr(zarr_path))
 However, the last alteration, which is removing the `_ARRAY_DIMENSIONS` key-value pair from one of the variables in the `.zmetadata` file present at the root of the zarr, results in an exception when reading. The error message is explicit: `KeyError: '_ARRAY_DIMENSIONS'` ❌
 
 This means xarray cannot open any Zarr file, but only those who possess an xarray's special
-private attribute, `_ARRAY_DIMENSIONS`. 
+private attribute, `_ARRAY_DIMENSIONS`.
 
-> Because of these choices, Xarray cannot read arbitrary array data, but only Zarr data with valid `_ARRAY_DIMENSIONS` 
+> Because of these choices, Xarray cannot read arbitrary array data, but only Zarr data with valid `_ARRAY_DIMENSIONS`
 
 See https://docs.xarray.dev/en/latest/internals/zarr-encoding-spec.html
 
 In a first phase, the error message can probably be more explicit (better than a low-level `KeyError`), explaining that xarray cannot yet open arbitrary Zarr data.
+
 
 
 ```python
@@ -363,4 +370,68 @@ show(xr.open_zarr(zarr_path))
 
 
     TypeError: the JSON object must be str, bytes or bytearray, not dict
+
+
+## `xr.show_versions()`
+
+
+
+```python
+import warnings
+
+warnings.filterwarnings("ignore")
+xr.show_versions()
+```
+
+    
+    INSTALLED VERSIONS
+    ------------------
+    commit: None
+    python: 3.10.12 (main, Aug 15 2023, 11:50:32) [GCC 9.4.0]
+    python-bits: 64
+    OS: Linux
+    OS-release: 5.15.0-92-generic
+    machine: x86_64
+    processor: x86_64
+    byteorder: little
+    LC_ALL: None
+    LANG: en_US.UTF-8
+    LOCALE: ('en_US', 'UTF-8')
+    libhdf5: None
+    libnetcdf: None
+    
+    xarray: 2023.10.1
+    pandas: 2.1.3
+    numpy: 1.25.2
+    scipy: None
+    netCDF4: None
+    pydap: None
+    h5netcdf: None
+    h5py: None
+    Nio: None
+    zarr: 2.16.1
+    cftime: None
+    nc_time_axis: None
+    PseudoNetCDF: None
+    iris: None
+    bottleneck: None
+    dask: 2023.11.0
+    distributed: None
+    matplotlib: None
+    cartopy: None
+    seaborn: None
+    numbagg: None
+    fsspec: 2023.10.0
+    cupy: None
+    pint: None
+    sparse: None
+    flox: None
+    numpy_groupies: None
+    setuptools: 67.8.0
+    pip: 23.1.2
+    conda: None
+    pytest: None
+    mypy: None
+    IPython: 8.17.2
+    sphinx: None
 
