@@ -125,7 +125,7 @@ I can have a look to fix the bug (forbidding Datasets containing path-like varia
 
 ```
 Given Dataset contains path-like variable names. 
-A Dataset represents group, and a single group cannot have path-like variable names.
+A Dataset represents a group, and a single group cannot have path-like variable names.
 Consider `DataTree.from_dict` to automatically create groups from a mapping of paths to data objects
 ```
 
